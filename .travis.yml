@@ -1,15 +1,12 @@
 language: node_js
-node_js: "9"
-
+node_js: '9'
 env:
   global:
-    - REPO_SLUG=MentalNomad/btg-core-config-generator
-    - secure: "ljz/dPa1KnZfPF1o8Yw9JjRaGHT8ZMnCFcRPdcbVjhe4gPFCX75y5Hz0W+RRBhHLvn/3aE6AwRwFIa44cZH5VYNqjEJ5MQjHcG0JCPILMSVFEdRF1SWhg/P49ZyssktpW7ceiBJdI2mVl1UAOff/hVfjyCkODe0/RI2ChsfvDqGGdeciAJZdS3Mix+T14quRB494D4nQ1S6Ig2AXhiMecJdyuCWkFYkgnosYJjezE4gA4+oFsnvfZhekrDaPtRosihSjhGlOialRbagvSI4UMnp/H/0aUMWsFu54eRj5Y1D78h87KxPaVt4+R8RqcK31ec7Nc8Re7jzP3uZMf5JMoLcs8JbOptGFd2ZztYvTWwBpscE/WNZbvkCKxUNcrehxzCx0vqqmGhnFw4rrbeu48XDZnnhsOfrPfh1ZX+auKLJZ1HW003+WQL5xg3fFixfcDr0pF2AGo40FdwWmhpjn2w4NO9bUsmGGy8tiU69mydVs28Q0X/aCh41PtHzvapN6GYxI4yI0TXH7o7n6XSx8CtKNm1U2cNz/ZQVuKNlyY7PVM9rZrEd2ykjAl/FT74lk0xQftw3Ww1Osq6vu1eDV6t7WXFHI5BPOAzmVlrG5m/edQFA1oNmqSTAfMYJ/pdQJMhJGp5J2flGOyYSSkSThnVU2nibwgkN9TdXrWBjvDDU="
-
+  - REPO_SLUG=MentalNomad/btg-core-config-generator
+  - secure: Xcv/H5LaeUtA7RGbPBD3A02px0OSbF5NWD3g22laP1K+Y1NBcUG3Ofby2OIhqvb1Xy+KIEeyrDwf3/rcjT5MLc/16SmXuJCwWC3iyBTqWV/6BjKMRWucE7uEb7+PSDeZS9Nmpm97Zu4e54XG80j6m8bezx0yOyaXnqCFGDm0lIVtpe6Mf7yFA215Zt7cmA9T9dJu3oezQMYbSJRcI9msZmV/uGZHAqWXNtdZ+kQDmwQwL9vG8pSofEBYAKUzUaTdlob1pwl3NrM0udAvYDffqnQGUxzvRsh2D2c9O10IErANWf5VyGLCCH/HgeK1dk1+2nqXr9SCgNRCxK1WEIbzJA1Ct8qghdgUU6uBu4JaCchwd6yYWkQBuZyPKO8KjUNS4PwKh/ASRkPL/ZwYc75VVqPqyNQ3jM6OFf0+0EDXk8fHg7Y7P3wHMrwpcY8x1KsdJ4ymra0X4CgLDD55hVx0v+OZNx3wiZemq4HFBPeFewpl2ZIeK/xQGomkZolF+1EajIz/JoSLgLbxV6gWrF1yzaQNw+gYa9NsRK36n0tHZ8JOx+2Vs2UTkzgDQ/+7JkILPuvZxVjfPTUeFETRSHpVmpz9jxJWIEUESTTwVvQV5yI0TnyWow6ysDlAq97UA7ekLZc1gHvwkjGvbyzq9acOBP6pDPpjPAWVODGNeEEXQcg=
 script:
-  - npm run lint
-  - npm test
-  - npm run build
-
+- npm run lint
+- npm test
+- npm run build
 after_success:
-  - ./scripts/deploy-to-gh-pages.sh
+- "./scripts/deploy-to-gh-pages.sh"
