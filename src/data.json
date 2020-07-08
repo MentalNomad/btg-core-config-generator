@@ -12,27 +12,12 @@
     }
   },
   "core": {
-    "section": "Bitcoin Core",
-    "description": "Basic parameters regarding Bitcoin Core node operation.",
+    "section": "BTG Core",
+    "description": "Basic parameters regarding BTG Core node operation.",
     "alertnotify": {
       "name": "Alert Notification",
       "description": "Execute command when an alert (or long fork) is received (%s in cmd is replaced by message)",
       "default": ""
-    },
-    "blockfilterindex": {
-      "name": "Block Filter Index",
-      "description": "Maintain an index of compact filters by block",
-      "description": {
-        "0": "Disable compact filters.",
-        "1": "Enable all compact filters.",
-        "basic": "Basic filters"
-      },
-      "default": "0",
-      "values": [
-        "Disable [0]",
-        "Enable All [1]",
-        "Basic Filters [basic]"
-      ]
     },
     "blocknotify": {
       "name": "Block Notification",
@@ -131,7 +116,7 @@
     "pid": {
       "name": "PID file",
       "description": "Specify process ID file name. Ignored for Windows.",
-      "default": "bitcoind.pid"
+      "default": "bgoldd.pid"
     },
     "prune": {
       "name": "Prune Old Blocks",
@@ -167,11 +152,6 @@
       "name": "Connect to Peer",
       "description": "Add a node IP address to connect to and attempt to keep the connection open. This option can be set multiple times.",
       "default": ""
-    },
-    "asmap": {
-      "name": "ASN Mapping",
-      "description": "Specify asn mapping used for bucketing of the peers. Relative paths will be prefixed by the net-specific datadir location.",
-      "default": "$BASE/ip_asn.map"
     },
     "banscore": {
       "name": "Peer Ban Threshold",
@@ -209,6 +189,11 @@
       "name": "Use DNS Seed",
       "description": "Query for peer addresses via DNS lookup, if low on addresses.",
       "default": 1
+    },
+    "enablebip61": {
+      "name": "Enable BIP61",
+      "description": "Send reject messages per BIP61.",
+      "default": 0
     },
     "externalip": {
       "name": "External IP Address",
@@ -281,12 +266,6 @@
       "description": "Support filtering of blocks and transactions with bloom filters.",
       "default": 1
     },
-    "peertimeout": {
-      "name": "Peer Timeout",
-      "description": "Specify p2p connection timeout in seconds. The amount of time a peer may be inactive before the connection to it is dropped.",
-      "default": 60,
-      "min": 1
-    },
     "port": {
       "name": "Listen Port",
       "description": "Listen for incoming connections on non-default port.",
@@ -309,7 +288,7 @@
     },
     "timeout": {
       "name": "Connection Timeout",
-      "description": "Initial peer connection timeout in milliseconds.",
+      "description": "Peer connection timeout in milliseconds.",
       "default": 5000,
       "min": 1
     },
@@ -330,12 +309,12 @@
     },
     "whitebind": {
       "name": "Whitelist Bound IP Address",
-      "description": "Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6. Use [permissions]address for permissions. Allowed permissions are bloomfilter, noban, forcerelay, relay, and mempool. Specify multiple permissions separated by commas (default: noban,mempool,relay). Can be specified multiple times.",
+      "description": "Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6.",
       "default": ""
     },
     "whitelist": {
       "name": "Whitelist Peer",
-      "description": "Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Use [permissions]address for permissions. Uses same permissions as Whitelist Bound IP Address. Can be specified multiple times. Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool. Useful for a gateway node.",
+      "description": "Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Can be specified multiple times. Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool. Useful for a gateway node.",
       "default": ""
     },
     "maxuploadtarget": {
@@ -367,31 +346,11 @@
       "name": "Publish Raw Transactions",
       "description": "Enable publishing of raw transaction hex to <address>.",
       "default": ""
-    },
-    "zmqpubhashblockhwm": {
-      "name": "Publish Block Hashes High Water Mark",
-      "description": "Set publish hash block outbound message high water mark.",
-      "default": 1000
-    },
-    "zmqpubhashtxhwm": {
-      "name": "Publish Transaction Hashes High Water Mark",
-      "description": "Set publish hash transaction outbound message high water mark.",
-      "default": 1000
-    },
-    "zmqpubrawblockhwm": {
-      "name": "Publish Raw Blocks High Water Mark",
-      "description": "Set publish raw block outbound message high water mark.",
-      "default": 1000
-    },
-    "zmqpubrawtxhwm": {
-      "name": "Publish Raw Transactions High Water Mark",
-      "description": "Set publish raw transaction outbound message high water mark.",
-      "default": 1000
     }
   },
   "debug": {
     "section": "Debugging & Testing",
-    "description": "Features that help developers who are testing changes to Bitcoin Core.",
+    "description": "Features that help developers who are testing changes to BTG Core.",
     "uacomment": {
       "name": "User Agent Comment",
       "description": "Append comment to the user agent string.",
@@ -487,7 +446,7 @@
         "bench": "Enable benchmark logging",
         "cmpctblock": "Enable compact block logging",
         "coindb": "Enable coin database logging",
-        "walletdb": "Enable wallet database logging",
+        "db": "Enable database logging",
         "http": "Enable HTTP logging",
         "leveldb": "Enable leveldb logging",
         "libevent": "Enable libevent logging",
@@ -663,17 +622,12 @@
     },
     "testnet": {
       "name": "Testnet",
-      "description": "Run this node on the Bitcoin Test Network. Equivalent to -chain=test",
+      "description": "Run this node on the BTG Test Network.",
       "default": 0
     },
     "regtest": {
       "name": "Regtest",
-      "description": "Run this node on its own independent test network. Equivalent to -chain=regtest",
-      "default": 0
-    },
-    "segwitheight": {
-      "name": "SegWit Height",
-      "description": "Set the activation height of segwit. -1 to disable. (regtest-only)",
+      "description": "Run this node on its own independent test network.",
       "default": 0
     }
   },
@@ -714,6 +668,11 @@
       "default": 83,
       "min": 1
     },
+    "mempoolreplacement": {
+      "name": "Allow Replacement of Mempool Transactions",
+      "description": "Allow transaction replacement in the memory pool.",
+      "default": 1
+    },
     "permitbaremultisig": {
       "name": "Permit Bare Multisig",
       "description": "Relay non-P2SH multisig transactions.",
@@ -729,6 +688,11 @@
       "name": "Whitelist Relay",
       "description": "Accept relayed transactions received from whitelisted peers even when not relaying transactions.",
       "default": 1
+    },
+    "whitelistforcerelay": {
+      "name": "Whitelist Force Relay",
+      "description": "Force relay of transactions from whitelisted peers even if they violate local relay policy.",
+      "default": 0
     }
   },
   "mining": {
@@ -792,7 +756,7 @@
     },
     "rpcauth": {
       "name": "RPC Auth",
-      "description": "Username and hashed password for JSON-RPC connections. The field <userpw> comes in the format: <USERNAME>:<SALT>$<HASH>. RPC clients connect using rpcuser=<USERNAME>/rpcpassword=<PASSWORD> arguments. You can generate this value with the ./share/rpcauth/rpcauth.py script in the Bitcoin Core repository. This option can be specified multiple times.",
+      "description": "Username and hashed password for JSON-RPC connections. The field <userpw> comes in the format: <USERNAME>:<SALT>$<HASH>. RPC clients connect using rpcuser=<USERNAME>/rpcpassword=<PASSWORD> arguments. You can generate this value with the ./share/rpcauth/rpcauth.py script in the BTG Core repository. This option can be specified multiple times.",
       "default": ""
     },
     "rpcport": {
@@ -803,16 +767,6 @@
     "rpcallowip": {
       "name": "RPC Allow IP Address",
       "description": "Allow JSON-RPC connections from specified source. Valid for <ip> are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times.",
-      "default": ""
-    },
-    "rpcwhitelistdefault": {
-      "name": "RPC Whitelist Default",
-      "description": "Sets default behavior for rpc whitelisting. Unless rpcwhitelistdefault is set to 0, if any -rpcwhitelist is set, the rpc server acts as if all rpc users are subject to empty-unless-otherwise-specified whitelists. If rpcwhitelistdefault is set to 1 and no -rpcwhitelist is set, rpc server acts as if all rpc users are subject to empty whitelists.",
-      "default": 0
-    },
-    "rpcwhitelist": {
-      "name": "RPC Whitelist",
-      "description": "Set a whitelist to filter incoming RPC calls for a specific user. The field <whitelist> comes in the format: <USERNAME>:<rpc 1>,<rpc 2>,...,<rpc n>. If multiple whitelists are set for a given user, they are set-intersected.",
       "default": ""
     },
     "rpcthreads": {

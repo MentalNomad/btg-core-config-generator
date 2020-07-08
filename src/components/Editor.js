@@ -32,7 +32,6 @@ class Editor extends Component {
 
         <Section title={data.core.section} description={data.core.description}>
           { this.text('core', 'alertnotify') }
-          { this.select('core', 'blockfilterindex') }
           { this.text('core', 'blocknotify') }
           { this.path('core', 'blocksdir', base, platform) }
           { this.flag('core', 'blocksonly') }
@@ -88,10 +87,8 @@ class Editor extends Component {
           { this.flag('debug', 'printpriority') }
           { this.text('debug', 'promiscuousmempoolflags') }
           { this.flag('debug', 'shrinkdebugfile') }
-          { this.select('debug', 'chain') }
           { this.flag('debug', 'testnet') }
           { this.flag('debug', 'regtest') }
-          { this.number('debug', 'segwitheight') }
         </Section>
         <Section title={data.mining.section} description={data.mining.description}>
           { this.number('mining', 'blockmaxweight') }
@@ -100,7 +97,6 @@ class Editor extends Component {
         </Section>
         <Section title={data.network.section} description={data.network.description}>
           { this.text('network', 'addnode') }
-          { this.path('network', 'asmap', base, platform) }
           { this.number('network', 'banscore') }
           { this.number('network', 'bantime') }
           { this.text('network', 'bind') }
@@ -108,6 +104,7 @@ class Editor extends Component {
           { this.flag('network', 'discover') }
           { this.flag('network', 'dns') }
           { this.flag('network', 'dnsseed') }
+          { this.flag('network', 'enablebip61') }
           { this.text('network', 'externalip') }
           { this.flag('network', 'forcednsseed') }
           { this.flag('network', 'listen') }
@@ -119,7 +116,6 @@ class Editor extends Component {
           { this.text('network', 'onion') }
           { this.select('network', 'onlynet') }
           { this.flag('network', 'peerbloomfilters') }
-          { this.number('network', 'peertimeout') }
           { this.number('network', 'port') }
           { this.text('network', 'proxy') }
           { this.flag('network', 'proxyrandomize') }
@@ -139,9 +135,11 @@ class Editor extends Component {
           { this.number('relay', 'bytespersigop') }
           { this.flag('relay', 'datacarrier') }
           { this.number('relay', 'datacarriersize') }
+          { this.flag('relay', 'mempoolreplacement') }
           { this.flag('relay', 'permitbaremultisig') }
           { this.decimal('relay', 'minrelaytxfee') }
           { this.flag('relay', 'whitelistrelay') }
+          { this.flag('relay', 'whitelistforcerelay') }
         </Section>
         <Section title={data.rpc.section} description={data.rpc.description}>
           { this.multiselect('rpc', 'deprecatedrpc') }
@@ -152,8 +150,6 @@ class Editor extends Component {
           { this.text('rpc', 'rpcauth') }
           { this.number('rpc', 'rpcport') }
           { this.text('rpc', 'rpcallowip') }
-          { this.flag('rpc', 'rpcwhitelistdefault') }
-          { this.text('rpc', 'rpcwhitelist') }
           { this.number('rpc', 'rpcthreads') }
           { this.number('rpc', 'rpcworkqueue') }
           { this.select('rpc', 'rpcserialversion') }
@@ -191,10 +187,6 @@ class Editor extends Component {
           { this.text('zeromq', 'zmqpubhashtx') }
           { this.text('zeromq', 'zmqpubrawblock') }
           { this.text('zeromq', 'zmqpubrawtx') }
-          { this.number('zeromq', 'zmqpubhashblockhwm') }
-          { this.number('zeromq', 'zmqpubhashtxhwm') }
-          { this.number('zeromq', 'zmqpubrawblockhwm') }
-          { this.number('zeromq', 'zmqpubrawtxhwm') }
         </Section>
       </div>
     );
@@ -262,7 +254,7 @@ class Editor extends Component {
         description={description}
         disabled={!isEnabled}
         large
-        >
+      >
         {data[section][prop].values.map(val).map(value => {
           const id = `${configMode}_${section}_${prop}_${value.value}`;
 
@@ -275,7 +267,7 @@ class Editor extends Component {
                 checked={current.indexOf(value.value) !== -1}
                 disabled={!isEnabled}
                 onChange={change(value.value)}
-                />
+              />
               <span className='mdl-switch__label'>{value.name}</span>
             </label>
           );
@@ -396,7 +388,7 @@ class Editor extends Component {
         title={data[section][prop].name}
         description={description}
         disabled={!isEnabled}
-        >
+      >
         <label className='mdl-switch mdl-js-switch' htmlFor={id}>
           <input
             type='checkbox'
@@ -474,7 +466,7 @@ export function fillDescription (description, value, key) {
         }
       }
       // remove trailing comma
-      formatted = formatted.replace(/(,$)/g, "");
+      formatted = formatted.replace(/(,$)/g, '');
       return formatted;
     }
     // If there is a single value and it exists in the description mapping, return it
